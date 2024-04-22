@@ -63,33 +63,74 @@ class ChatServer {
     }
 }
 ```
+Code for `Server.java`
+```
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
+import java.net.URI;
+
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpServer;
+
+interface URLHandler {
+    String handleRequest(URI url);
+}
+
+class ServerHttpHandler implements HttpHandler {
+    URLHandler handler;
+    ServerHttpHandler(URLHandler handler) {
+      this.handler = handler;
+    }
+    public void handle(final HttpExchange exchange) throws IOException {
+        // form return body after being handled by program
+        try {
+            String ret = handler.handleRequest(exchange.getRequestURI());
+            // form the return string and write it on the browser
+            exchange.sendResponseHeaders(200, ret.getBytes().length);
+            OutputStream os = exchange.getResponseBody();
+            os.write(ret.getBytes());
+            os.close();
+        } catch(Exception e) {
+            String response = e.toString();
+            exchange.sendResponseHeaders(500, response.getBytes().length);
+            OutputStream os = exchange.getResponseBody();
+            os.write(response.getBytes());
+            os.close();
+        }
+    }
+}
+
+public class Server {
+    public static void start(int port, URLHandler handler) throws IOException {
+        HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
+
+        //create request entrypoint
+        server.createContext("/", new ServerHttpHandler(handler));
+
+        //start the server
+        server.start();
+        System.out.println("Server Started! If on your local computer, visit http://localhost:" + port + " to visit.");
+    }
+}
+```
 screenshot1: ![Image](interaction1.PNG)
 
 The two `methods` called are `handleRequest(URI url)` and `parseQuery(String query)`.
 
-`Arguments`:
+Arguments: `URI url` with a value of new `URI("/add-message?s=Hi!&user=Kevin")`and `String query` with a `value` of `"s=Hi!&user=Kevin"`
 
-`URI url` with a value of new `URI("/add-message?s=Hi!&user=Kevin")`and `String query` with a `value` of `"s=Hi!&user=Kevin"`
+Field Values: `StringBuilder chatLog` initially `empty`
 
-`Field Values`:
-
-`StringBuilder chatLog` initially `empty`
-
-`Field` Changes:
-
-`chatLog` changes from an `empty` state to `"Kevin: Hi!\n"` after appending the formatted message.
+Field Changes: `chatLog` changes from an `empty` state to `"Kevin: Hi!\n"` after appending the formatted message.
 
 screenshot2: ![Image](interaction2.PNG)
 
-1.The two `methods` called are `handleRequest(URI url)` and `parseQuery(String query)`.
+The two `methods` called are `handleRequest(URI url)` and `parseQuery(String query)`.
 
-`Arguments`:
+Arguments: `URI url` with a `value` of new `URI("/add-message?s=Hey How are you?&user=John")` and `String query` with a `value` of `"s=Hey How are you?&user=John"`
 
-`URI url` with a `value` of new `URI("/add-message?s=Hey How are you?&user=John")` and `String query` with a `value` of `"s=Hey How are you?&user=John"`
+Field Values: `StringBuilder chatLog` currently holding `"Kevin: Hi!\n"`
 
-`Field Values:`
-
-`StringBuilder chatLog` currently holding `"Kevin: Hi!\n"`
-
-`Field` Changes:
-`chatLog` changes from `"Kevin: Hi!\n"` to `"Kevin: Hi!\nJohn: Hey How are you?\n"` after appending the second formatted message.
+Field Changes: `chatLog` changes from `"Kevin: Hi!\n"` to `"Kevin: Hi!\nJohn: Hey How are you?\n"` after appending the second formatted message.
