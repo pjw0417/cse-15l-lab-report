@@ -63,7 +63,7 @@ class ChatServer {
     }
 }
 ```
-Code for `Server.java`
+Code for `Server.java` used from Week2 materials
 ```
 import java.io.IOException;
 import java.io.OutputStream;
@@ -117,30 +117,35 @@ public class Server {
 ```
 screenshot1: ![Image](interaction1.PNG)
 
-The two `methods` called are `handleRequest(URI url)` and `parseQuery(String query)`.
+**Methods:** The two `methods` called are `handleRequest(URI url)` and `parseQuery(String query)`. `handleRequest(URI url)` is called each time a request is made. It checks the `path` of the `URI ("/add-message")` and processes the provided `query parameters` accordingly. `parseQuery(String query)` extracts the `parameters` `user` and `s` from the `query string`. It splits the `query string` into a `map` where `keys` are the `parameter names` and `values` are the `URL-decoded` contents of these `parameters`. `chatLog Field` is the `key field` that stores the `chat log`. It starts `empty` and gets appended with formatted messages as each valid `/add-message` request is processed.
 
-Arguments: `URI url` with a value of new `URI("/add-message?s=Hi!&user=Kevin")`and `String query` with a `value` of `"s=Hi!&user=Kevin"`
+**Arguments:**  `URI url` with a value of new `URI("/add-message?s=Hi!&user=Kevin")`and `String query` with a `value` of `"s=Hi!&user=Kevin"`
 
-Field Values: `StringBuilder chatLog` initially `empty`
+**Field Values:**  `StringBuilder chatLog` initially `empty`
 
-Field Changes: `chatLog` changes from an `empty` state to `"Kevin: Hi!\n"` after appending the formatted message.
+**Field Changes:**  `chatLog` changes from an `empty` state to `"Kevin: Hi!\n"` after appending the formatted message.
 
 screenshot2: ![Image](interaction2.PNG)
 
-The two `methods` called are `handleRequest(URI url)` and `parseQuery(String query)`.
+**Methods:** The two `methods` called are `handleRequest(URI url)` and `parseQuery(String query)`. `handleRequest(URI url)` is called each time a request is made. It checks the `path` of the `URI ("/add-message")` and processes the provided `query parameters` accordingly. `parseQuery(String query)` extracts the `parameters` `user` and `s` from the `query string`. It splits the `query string` into a `map` where `keys` are the `parameter names` and `values` are the `URL-decoded` contents of these `parameters`. `chatLog Field` is the `key field` that stores the `chat log`. It starts `empty` and gets appended with formatted messages as each valid `/add-message` request is processed.
 
-Arguments: `URI url` with a `value` of new `URI("/add-message?s=Hey How are you?&user=John")` and `String query` with a `value` of `"s=Hey How are you?&user=John"`
+**Arguments:** `URI url` with a `value` of new `URI("/add-message?s=Hey How are you?&user=John")` and `String query` with a `value` of `"s=Hey How are you?&user=John"`
 
-Field Values: `StringBuilder chatLog` currently holding `"Kevin: Hi!\n"`
+**Field Values:** `StringBuilder chatLog` currently holding `"Kevin: Hi!\n"`
 
-Field Changes: `chatLog` changes from `"Kevin: Hi!\n"` to `"Kevin: Hi!\nJohn: Hey How are you?\n"` after appending the second formatted message.
+**Field Changes:**  `chatLog` changes from `"Kevin: Hi!\n"` to `"Kevin: Hi!\nJohn: Hey How are you?\n"` after appending the second formatted message.
 
 **Part2**
+
 screenshot3: ![Image](privatekey.PNG)
+
 
 screenshot4: ![Image](publickey.PNG)
 
+
 screenshot5: ![Image](terminalLogin.PNG)
 
+
 **Part3**
+
 From week2, I learned how to launch a `web server` in `Java` through `Server.java` and `URL Handler`.I learned how to access `url` result using `curl` command From week3, I learned how to connect to `remote Computer` through `ssh keys` and run my `server`. Moreover, I learned how to write own interactive simple `webserver`.
