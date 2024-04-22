@@ -1,6 +1,7 @@
 **Part1**
 Code for `ChatServer.java`
 
+```
 import java.io.IOException;
 import java.net.URI;
 import java.net.URLDecoder;
@@ -61,7 +62,7 @@ class ChatServer {
         Server.start(port, new Handler());
     }
 }
-
+```
 screenshot1: ![Image](interaction1.PNG)
 
 The two `methods` called are `handleRequest(URI url)` and `parseQuery(String query)`.
