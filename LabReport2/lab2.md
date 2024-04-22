@@ -134,3 +134,13 @@ Arguments: `URI url` with a `value` of new `URI("/add-message?s=Hey How are you?
 Field Values: `StringBuilder chatLog` currently holding `"Kevin: Hi!\n"`
 
 Field Changes: `chatLog` changes from `"Kevin: Hi!\n"` to `"Kevin: Hi!\nJohn: Hey How are you?\n"` after appending the second formatted message.
+
+**Part2**
+screenshot3: ![Image](privatekey.PNG)
+
+screenshot4: ![Image](publickey.PNG)
+
+screenshot5: ![Image](terminalLogin.PNG)
+
+**Part3**
+From week2, I learned how to launch a `web server` in `Java` through `Server.java` and `URL Handler`.I learned how to access `url` result using `curl` command From week3, I learned how to connect to `remote Computer` through `ssh keys` and run my `server`. Moreover, I learned how to write own interactive simple `webserver`.
