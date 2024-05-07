@@ -59,6 +59,8 @@ static void reverseInPlace(int[] arr) {
     }
   }
 ```
+
+5. 
 The initial code for `BugreverseInPlace` attempts to reverse an `array` in place but incorrectly `overwrites` the `elements` during the `iteration`, leading to incorrect results as the `array` is modified while it's being used for assignments. The corrected `reverseInPlace` function resolves this by first copying the `original array` `elements` into a `duplicate array`, which safely stores the `original values`. Then, it uses this `duplicate array` to correctly assign the `reversed values` back to the `original array`, ensuring that the reversal is accurately achieved without unintended `overwrites`.
 
 **Part2 Researching Commands**
