@@ -1,7 +1,7 @@
 **Part1 Bugs**
 
-1. 
-Buggy code
+
+**Buggy code**
 ```
 static void BugreverseInPlace(int[] arr) {
     for(int i = 0; i < arr.length; i += 1) {
@@ -9,7 +9,7 @@ static void BugreverseInPlace(int[] arr) {
     }
 }
 ```
-Failure-inducing input
+**Failure-inducing input**
 ```
 @Test 
 public void testBugreverseInPlace() {
@@ -20,8 +20,8 @@ assertArrayEquals(new int[]{ 1,2,3 }, input1);
 ```
 
 
-2.  
-Input that doesn't induce failure
+
+**Input that doesn't induce failure**
 ```
 @Test 
 public void testBugPassreverseInPlace() {
@@ -30,16 +30,16 @@ ArrayBugExamples.BugreverseInPlace(input1);
 assertArrayEquals(new int[]{ 1,2,1 }, input1);
 }
 ```
-3. 
+**Screenshot of Tests**
+
 
 
 screenshot1: ![BugTest](Bugtests.PNG)
 
 
 
-4. 
 
-Before code
+**Before code**
 ```
 static void BugreverseInPlace(int[] arr) {
     for(int i = 0; i < arr.length; i += 1) {
@@ -48,7 +48,7 @@ static void BugreverseInPlace(int[] arr) {
 }
 ```
 
-After code
+**After code**
 ```
 static void reverseInPlace(int[] arr) {
     int[] duplicateArray = new int[arr.length];
@@ -60,12 +60,12 @@ static void reverseInPlace(int[] arr) {
   }
 ```
 
-5. 
+**Justification for solution**
 The initial code for `BugreverseInPlace` attempts to reverse an `array` in place but incorrectly `overwrites` the `elements` during the `iteration`, leading to incorrect results as the `array` is modified while it's being used for assignments. The corrected `reverseInPlace` function resolves this by first copying the `original array` `elements` into a `duplicate array`, which safely stores the `original values`. Then, it uses this `duplicate array` to correctly assign the `reversed values` back to the `original array`, ensuring that the reversal is accurately achieved without unintended `overwrites`.
 
 **Part2 Researching Commands**
 
-1. Option `-i` (Ignore Case)
+**Option `-i` (Ignore Case)**
 The `-i` option makes the search `case-insensitive`, allowing me to search for a pattern without worrying about the case of the letters.In `chapter-1.txt`, I found ``lines` with `"weather"` and `"portland"` while ignoring the `case sensitiveness`.This is useful esepcially when I am looking for a word that I am unsure whether it is capitalized or not.
 
 
@@ -82,7 +82,7 @@ $ grep -i "portland" chapter-1.txt
 ```
 
 
-2. Option `-r` (recursive)
+**Option `-r` (recursive)**
 
 The `-r` option allows grep to perform a `recursive search`, examining all `files` under each `directory`, down through the entire `directory` tree.I used this to find "preface" and "bring" in `/technical/911report`. It was useful because I didn't have to go through all files in multiple directories to find `lines` containing these keywords.
 
@@ -145,7 +145,7 @@ chapter-9.txt:                second Level 4 mobilization, bringing the total nu
 ```
 
 
-3. Option `-v` (Invert Match)
+**Option `-v` (Invert Match)**
 The `-v` option inverts the match, showing only the `lines` that do not match the pattern. I found `lines` in `preface.txt` that do not contain `"enemy"` and `"important"`. This is useful when I need to find lines that have `errors` and I want to isolate them. 
 
 
@@ -366,7 +366,7 @@ $ grep -v "important" preface.txt
             Lee H. Hamilton, vice chair
 ```
 
-4. Option `-n` (Line numbers)
+**Option `-n` (Line numbers)**
 The `-n` option adds `line numbering` to the search results, which provides the `line numbers` from the original file where each match is found. I found `lines` that contain `"60"` and `"PDTC"` in `technical/biomed/1471-230X-1-5.txt`
 This is particularly useful for debugging code, analyzing logs, or any scenario where you need to know exactly where in a file something occurs. 
 
